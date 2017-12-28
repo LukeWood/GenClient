@@ -15,11 +15,12 @@ defmodule GenClientTest do
     assert increment_by_created
   end
 
-  test "GenClient in testmodule" do
-    TestModule.Server.handle_call({:increment}, self(), 1) |> IO.inspect
+  test "TestModule.Server.handle_call works in testmodule" do
+    assert TestModule.Server.handle_call({:increment}, self(), 1) == 2
   end
 
-  test "TestModule.Client test" do
-    TestModule.Client.increment()
+  test "GenClient can be used with GenServer.start" do
+    {:ok, pid} = GenServer.start(TestModule.Server, [0])
+    assert TestModule.Client.increment(pid) == 1
   end
 end

@@ -32,3 +32,23 @@ defmodule Counter.Server do
 end
 
 ```
+
+Transforms to:
+
+```elixir
+defmodule Counter do
+  use GenClient, for: Counter.Impl
+end
+
+defmodule Counter.Impl do
+  @cast
+  def increment(state) do
+    state+1
+  end
+  
+  @call
+  def peek(state) do
+    state
+  end
+end
+```

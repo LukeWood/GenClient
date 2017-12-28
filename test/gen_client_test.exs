@@ -1,4 +1,7 @@
 defmodule GenClientTest do
   use ExUnit.Case
-  use GenClient, for: TestModule.Impl
+
+  test "GenClient in testmodule" do
+    TestModule.handle_call({:meow}, self(), 1) |> IO.inspect
+  end
 end

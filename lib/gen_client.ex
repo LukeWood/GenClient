@@ -12,7 +12,7 @@ defmodule GenClient do
     end
   end
 
-  defp generate_client_definitions(function) do
+  defp generate_client_definitions(_function) do
     quote do
       def meow() do
         IO.inspect("MEOW")
@@ -21,12 +21,12 @@ defmodule GenClient do
   end
 
   defp generate_server_definitions(_function) do
-    args = {:meow}
-    function = fn x->x+1 end
+    args = quote do {:meow} end
+    #function = fn x->x+1 end
     quote do
       def handle_call(unquote(args), _from, state) do
-        unquote(function(state))
+        state
       end
-    end
+    end |> IO.inspect
   end
 end

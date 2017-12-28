@@ -37,6 +37,7 @@ end
 defmodule Counter.Impl do
   def increment(state), do: state + 1
 end
+```
 
 # Transforms to:
 

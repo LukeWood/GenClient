@@ -28,7 +28,7 @@ defmodule GenClient.ClientGeneration do
 
   defp generate_client_args(arity) do
     arity = arity - 1
-    args = [{:pid, [], Elixir}, {:state, [], Elixir}]
+    args = [{:pid, [], Elixir}]
 
     other_args = if arity >= 1 do
       Enum.map(Range.new(1, arity), &(generate_arg(&1)))

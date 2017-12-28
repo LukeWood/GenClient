@@ -15,11 +15,11 @@ defmodule Counter.Client do
   def increment() do
     GenServer.cast(pid. :increment)
   end
-  
+
   def peek() do
     GenServer.call(pid, :peek)
   end
-  
+
 end
 ```
 ```elixir
@@ -27,7 +27,7 @@ defmodule Counter.Server do
   def handle_cast(:increment, state) do
     {:no_reply, Counter.Impl.increment(state)}
   end
-  
+
   def handle_call(:peek, _from, state) do
     {:reply, state, state}
   end
@@ -49,7 +49,7 @@ end
 defmodule Counter.Impl do
   @cast
   def increment(state), do: state + 1
-  
+
   @call
   def peek(state), do: state
 end

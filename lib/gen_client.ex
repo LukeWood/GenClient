@@ -1,18 +1,8 @@
 defmodule GenClient do
-  @moduledoc """
-  Documentation for GenClient.
-  """
+  defmacro __using__(for: module) do
+    module_expanded = Macro.expand(module, __ENV__)
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> GenClient.hello
-      :world
-
-  """
-  def hello do
-    :world
+    functions = module_expanded.__info__(:functions)
+    IO.inspect functions
   end
 end

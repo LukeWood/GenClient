@@ -52,3 +52,5 @@ defmodule Counter.Impl do
   end
 end
 ```
+
+###### The resulting api should be exactly the same

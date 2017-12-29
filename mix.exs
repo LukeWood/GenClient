@@ -4,7 +4,7 @@ defmodule GenClient.Mixfile do
   def project do
     [
       app: :gen_client,
-      version: "1.0.0",
+      version: "1.0.1",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       deps: deps(),
@@ -20,7 +20,7 @@ defmodule GenClient.Mixfile do
 
   defp package() do
     [
-      name: "GenClient",
+      name: "gen_client",
       maintainers: ["Luke Wood"],
       licenses: ["MIT"],
       links: %{"Github" => "https://github.com/LukeWood/GenClient/"}

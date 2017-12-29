@@ -42,9 +42,7 @@ defmodule Counter.Server do
 end
 ```
 ###### counter/impl.ex
-Obviously this is unneccesary in the case of a counter but in more complex
-applications it is nice to separate the state manipulation logic from the GenServer
-logic
+
 ```elixir
 defmodule Counter.Impl do
   def increment(state), do: state + 1

@@ -1,6 +1,13 @@
 # GenClient
 GenClient is an elixir library made to generate boilerplate code that I found myself repeatedly writing and changing when working with GenServers
 
+### Adding as a mix dependency
+```elixir
+  def deps do
+    [{:gen_client, git:"https://github.com/LukeWood/GenClient"}]
+  end
+```
+
 ### Example
 The following module definition should be rewritten with GenClient as follows:
 ```elixir

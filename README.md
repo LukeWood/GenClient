@@ -43,14 +43,17 @@ end
 
 ```elixir
 defmodule Counter do
-  use GenClient, for: Counter.Impl
+  @calls [:peek]
+  @casts [:increment, :increment_by]
+  
+  # Would like to prevent the need for explicit passing of calls and casts to give a slightly nicer API
+  use GenClient, for: Counter.Impl,
+    calls: @calls, 
+    casts: @casts
 end
 
 defmodule Counter.Impl do
-  @cast
   def increment(state), do: state + 1
-
-  @call
   def peek(state), do: state
 end
 ```

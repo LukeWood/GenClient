@@ -10,7 +10,7 @@ defmodule TestModule.Impl do
 end
 
 defmodule TestModule do
-  use GenClient, [for: TestModule.Impl,
-                  calls: [peek],
-                  casts: [increment, increment_by]]
+  use GenClient, for: TestModule.Impl,
+                  calls: [:peek],
+                  casts: [:increment, :increment_by]
 end

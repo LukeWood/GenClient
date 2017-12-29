@@ -10,9 +10,9 @@ defmodule GenClient.CastGeneration do
     call_args = [state_arg] ++ call_args(server_args)
 
     result = quote do
-      def handle_call({unquote_splicing(server_args)}, _from, unquote(state_arg)) do
+      def handle_cast({unquote_splicing(server_args)}, unquote(state_arg)) do
         result = apply(unquote(module), unquote(function_name), [unquote_splicing(call_args)])
-        {:reply, result, result}
+        {:noreply, result}
       end
     end
 

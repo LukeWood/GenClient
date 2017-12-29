@@ -1,7 +1,7 @@
 defmodule GenClient.ClientGeneration do
 
   #TODO(lukewood) use the real function names from the impl
-  def generate_client_definitions(function) do
+  def generate_client_call_definitions(function) do
     function_name = elem(function, 0)
     arity = elem(function, 1)
 
@@ -12,6 +12,21 @@ defmodule GenClient.ClientGeneration do
     quote do
       def unquote(function_name)(unquote_splicing(client_args)) do
         GenServer.call(unquote(pid_arg), {unquote_splicing(call_args)})
+      end
+    end
+  end
+
+  def generate_client_cast_definitions(function) do
+    function_name = elem(function, 0)
+    arity = elem(function, 1)
+
+    client_args = generate_client_args(arity)
+    call_args = call_args(client_args, function_name)
+    pid_arg = Enum.at(client_args, 0)
+
+    quote do
+      def unquote(function_name)(unquote_splicing(client_args)) do
+        GenServer.cast(unquote(pid_arg), {unquote_splicing(call_args)})
       end
     end
   end

@@ -5,13 +5,6 @@ Every time I wanted to add or remove a parameter from a GenServer module I neede
 
 GenClient is a metaprogramming library that helps the programmer write their logic in a single location and keep it there.
 
-### Adding as a mix dependency
-```elixir
-  def deps do
-    [{:gen_client, git:"https://github.com/LukeWood/GenClient"}]
-  end
-```
-
 ### Example
 Here is a module written using a standard GenServer implementation
 
@@ -60,6 +53,7 @@ end
 
 # The Previous Module Can be written using GenClient as follows:
 
+###### counter.ex
 ```elixir
 defmodule Counter do
   use GenClient,
@@ -67,11 +61,20 @@ defmodule Counter do
     calls: [:peek],
     casts: [:increment, :increment_by]
 end
-
+```
+###### counter/counter.impl.ex
+```elixir
 defmodule Counter.Impl do
   def increment(state), do: state + 1
   def peek(state), do: state
 end
 ```
 
-###### The resulting api should be exactly the same
+###### The resulting api will be exactly the same
+
+### Adding as a mix dependency
+```elixir
+  def deps do
+    [{:gen_client, git:"https://github.com/LukeWood/GenClient"}]
+  end
+```

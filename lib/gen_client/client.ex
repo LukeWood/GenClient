@@ -2,10 +2,8 @@ defmodule GenClient.Client do
 
   def create(calls, casts) do
     quote do
-      defmodule Client do
-        unquote_splicing(calls)
-        unquote_splicing(casts)
-      end
+      unquote_splicing(calls)
+      unquote_splicing(casts)
     end
   end
 

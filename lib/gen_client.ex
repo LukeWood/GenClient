@@ -21,10 +21,10 @@ defmodule GenClient do
     )
 
     server_call_definitions = Enum.map(calls,
-      &GenClient.CallGeneration.generate_call_definitions(module, &1)
+      &GenClient.ServerGeneration.generate_call_definitions(module, &1)
     )
     server_cast_definitions = Enum.map(casts,
-      &GenClient.CastGeneration.generate_cast_definitions(module, &1)
+      &GenClient.ServerGeneration.generate_cast_definitions(module, &1)
     )
 
      quote do

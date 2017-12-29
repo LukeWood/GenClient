@@ -4,7 +4,7 @@ GenClient is an elixir library made to generate boilerplate code that I found my
 ### Adding as a mix dependency
 ```elixir
   def deps do
-    [{:genclient, git:"https://github.com/LukeWood/GenClient"}]
+    [{:gen_client, git:"https://github.com/LukeWood/GenClient"}]
   end
 ```
 

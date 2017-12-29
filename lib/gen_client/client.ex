@@ -26,8 +26,7 @@ defmodule GenClient.Client do
   end
 
   def cast_definition(function) do
-    function_name = elem(function, 0)
-    arity = elem(function, 1)
+    {function_name, arity} = function
 
     client_args = generate_client_args(arity)
     call_args = call_args(client_args, function_name)

@@ -39,7 +39,7 @@ defmodule Counter.Impl do
 end
 ```
 
-# Transforms to:
+# Can be written using GenClient as follows:
 
 ```elixir
 defmodule Counter do

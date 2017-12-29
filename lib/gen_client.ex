@@ -1,14 +1,15 @@
 defmodule GenClient do
-  defmacro __using__(for: module) do
+  defmacro __using__(for: module, calls: calls, casts: casts) do
 
-    module_expanded = Macro.expand(module, __ENV__)
-    functions = module_expanded.__info__(:functions)
-
-    client_definitions = Enum.map(functions,
+    client_definitions = Enum.map(calls ++ casts,
       &GenClient.ClientGeneration.generate_client_definitions/1
     )
-    server_definitions = Enum.map(functions,
-      &GenClient.ServerGeneration.generate_server_definitions(module, &1)
+    call_definitions = Enum.map(calls,
+      &GenClient.ServerGeneration.generate_call_definitions(module, &1)
+    )
+
+    cast_definitions = Enum.map(casts,
+      &GenClient.ServerGeneration.generate_cast_definitions(module, &1)
     )
 
      quote do
@@ -17,7 +18,8 @@ defmodule GenClient do
       end
       defmodule Server do
         use GenServer
-        unquote_splicing(server_definitions)
+        unquote_splicing(call_definitions)
+        unquote_splicing(cast_definitions)
       end
     end
   end

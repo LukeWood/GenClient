@@ -23,5 +23,9 @@ defmodule GenClientTest do
   test "GenClient can be used with GenServer.start" do
     {:ok, pid} = GenServer.start(TestModule.Server, 0)
     assert TestModule.Client.increment(pid) == 1
+    assert TestModule.Client.increment_by(pid, 5) == 6
+    # default arg of 5 for testing purposes
+    assert TestModule.Client.increment_by(pid) == 11
+
   end
 end

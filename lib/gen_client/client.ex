@@ -10,55 +10,33 @@ defmodule GenClient.Client do
   end
 
   def call_definition(function) do
-    function_name = elem(function, 0)
-    arity = elem(function, 1)
-
-    client_args = generate_client_args(arity)
-    call_args = call_args(client_args, function_name)
-    pid_arg = Enum.at(client_args, 0)
+    {function_name, params, fn_args, pid_arg} = setup_definition(function)
 
     quote do
-      def unquote(function_name)(unquote_splicing(client_args)) do
-        GenServer.call(unquote(pid_arg), {unquote_splicing(call_args)})
+      def unquote(function_name)(unquote_splicing(params)) do
+        GenServer.call(unquote(pid_arg), {unquote_splicing(fn_args)})
       end
     end
   end
 
   def cast_definition(function) do
-    {function_name, arity} = function
-
-    client_args = generate_client_args(arity)
-    call_args = call_args(client_args, function_name)
-    pid_arg = Enum.at(client_args, 0)
+    {function_name, params, fn_args, pid_arg} = setup_definition(function)
 
     quote do
-      def unquote(function_name)(unquote_splicing(client_args)) do
-        GenServer.cast(unquote(pid_arg), {unquote_splicing(call_args)})
+      def unquote(function_name)(unquote_splicing(params)) do
+        GenServer.cast(unquote(pid_arg), {unquote_splicing(fn_args)})
       end
     end
   end
 
-  defp call_args(client_args, function_name) do
-    [_h | t] = client_args
-    [function_name] ++ t
-  end
+  def setup_definition({function_name, arity}) do
+    pid_arg = {:pid, [], Elixir}
+    fn_args = GenClient.Util.n_args(arity)
+    params = [pid_arg] ++ fn_args
 
-  defp generate_arg(number) do
-    name = String.to_atom("arg#{number}")
-    {name, [], Elixir}
-  end
+    fn_args = [function_name] ++ fn_args
 
-  defp generate_client_args(arity) do
-    arity = arity - 1
-    args = [{:pid, [], Elixir}]
-
-    other_args = if arity >= 1 do
-      Enum.map(Range.new(1, arity), &(generate_arg(&1)))
-    else
-      []
-    end
-
-    args ++ other_args
+    {function_name, params, fn_args, pid_arg}
   end
 
 end

@@ -32,8 +32,7 @@ defmodule GenClient.Server do
     end
   end
 
-  def setup_definition(function) do
-    {function_name, arity} = function
+  def setup_definition({function_name, arity}) do
     parameters = make_parameters(arity, function_name)
 
     state_arg = {:state, [], Elixir}
@@ -45,14 +44,7 @@ defmodule GenClient.Server do
   end
 
   defp make_parameters(arity, function_name) do
-    [function_name] ++ n_args(arity)
+    [function_name] ++ GenClient.Util.n_args(arity)
   end
 
-  defp n_args(1), do: []
-  defp n_args(arity), do: Enum.map(Range.new(1, arity-1), &create_arg/1)
-
-  defp create_arg(number) do
-    name = String.to_atom("arg#{number}")
-    {name, [], Elixir}
-  end
 end

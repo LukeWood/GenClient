@@ -9,7 +9,6 @@ defmodule GenClient.Client do
     end
   end
 
-  #TODO(lukewood) use the real function names from the impl
   def call_definition(function) do
     function_name = elem(function, 0)
     arity = elem(function, 1)

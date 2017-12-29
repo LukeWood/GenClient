@@ -26,4 +26,13 @@ defmodule GenClientTest do
     TestModule.Client.increment_by(pid)
     assert TestModule.Client.peek(pid) == 11
   end
+
+  test "increment at 5 inverts" do
+    {:ok, pid} = GenServer.start(TestModule.Server, 0)
+    TestModule.Client.increment_by(pid, 5)
+    assert TestModule.Client.peek(pid) == 5
+
+    TestModule.Client.increment(pid)
+    assert TestModule.Client.peek(pid) == -5
+  end
 end

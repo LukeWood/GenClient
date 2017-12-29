@@ -1,7 +1,9 @@
 ExUnit.start()
 
 defmodule TestModule.Impl do
+  def increment(5), do: -5
   def increment(state), do: helper(state)
+
   defp helper(state), do: state + 1
 
   def increment_by(state, num), do: state + num

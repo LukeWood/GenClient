@@ -1,12 +1,5 @@
 defmodule GenClient.Client do
 
-  def create(calls, casts) do
-    quote do
-      unquote_splicing(calls)
-      unquote_splicing(casts)
-    end
-  end
-
   def call_definition(function) do
     {function_name, params, fn_args, pid_arg} = setup_definition(function)
     quote do

@@ -78,3 +78,9 @@ end
     [{:gen_client, git:"https://github.com/LukeWood/GenClient"}]
   end
 ```
+or
+```elixir
+def deps do
+  [{:gen_client, "~> 1.0.1"}]
+end
+```

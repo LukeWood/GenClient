@@ -21,7 +21,7 @@ defmodule GenClient do
     client = GenClient.Client.create(client_calls, client_casts)
     server = GenClient.Server.create(server_calls, server_casts)
 
-     quote do
+    quote do
       unquote(client)
       unquote(server)
     end

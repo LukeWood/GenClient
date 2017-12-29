@@ -1,6 +1,16 @@
 defmodule GenClient.Server do
 
-  def call_definitions(module, function) do
+  def create(calls, casts) do
+    quote do
+      defmodule Server do
+        use GenServer
+        unquote_splicing(calls)
+        unquote_splicing(casts)
+      end
+    end
+  end
+
+  def call_definition(module, function) do
     function_name = elem(function, 0)
     arity = elem(function, 1)
 
@@ -9,17 +19,15 @@ defmodule GenClient.Server do
     state_arg = {:state, [], Elixir}
     call_args = [state_arg] ++ call_args(server_args)
 
-    result = quote do
+    quote do
       def handle_call({unquote_splicing(server_args)}, _from, unquote(state_arg)) do
         result = apply(unquote(module), unquote(function_name), [unquote_splicing(call_args)])
         {:reply, result, result}
       end
     end
-
-    result
   end
 
-  def cast_definitions(module, function) do
+  def cast_definition(module, function) do
     function_name = elem(function, 0)
     arity = elem(function, 1)
 
@@ -28,14 +36,12 @@ defmodule GenClient.Server do
     state_arg = {:state, [], Elixir}
     call_args = [state_arg] ++ call_args(server_args)
 
-    result = quote do
+    quote do
       def handle_cast({unquote_splicing(server_args)}, unquote(state_arg)) do
         result = apply(unquote(module), unquote(function_name), [unquote_splicing(call_args)])
         {:noreply, result}
       end
     end
-
-    result
   end
 
   defp call_args(server_args) do

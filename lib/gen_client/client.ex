@@ -1,7 +1,16 @@
 defmodule GenClient.Client do
 
+  def create(calls, casts) do
+    quote do
+      defmodule Client do
+        unquote_splicing(calls)
+        unquote_splicing(casts)
+      end
+    end
+  end
+
   #TODO(lukewood) use the real function names from the impl
-  def call_definitions(function) do
+  def call_definition(function) do
     function_name = elem(function, 0)
     arity = elem(function, 1)
 
@@ -16,7 +25,7 @@ defmodule GenClient.Client do
     end
   end
 
-  def cast_definitions(function) do
+  def cast_definition(function) do
     function_name = elem(function, 0)
     arity = elem(function, 1)
 

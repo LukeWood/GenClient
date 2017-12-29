@@ -1,7 +1,7 @@
-defmodule GenClient.ClientGeneration do
+defmodule GenClient.Client do
 
   #TODO(lukewood) use the real function names from the impl
-  def generate_client_call_definitions(function) do
+  def call_definitions(function) do
     function_name = elem(function, 0)
     arity = elem(function, 1)
 
@@ -16,7 +16,7 @@ defmodule GenClient.ClientGeneration do
     end
   end
 
-  def generate_client_cast_definitions(function) do
+  def cast_definitions(function) do
     function_name = elem(function, 0)
     arity = elem(function, 1)
 

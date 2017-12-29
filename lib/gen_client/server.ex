@@ -1,6 +1,6 @@
-defmodule GenClient.ServerGeneration do
+defmodule GenClient.Server do
 
-  def generate_call_definitions(module, function) do
+  def call_definitions(module, function) do
     function_name = elem(function, 0)
     arity = elem(function, 1)
 
@@ -19,7 +19,7 @@ defmodule GenClient.ServerGeneration do
     result
   end
 
-  def generate_cast_definitions(module, function) do
+  def cast_definitions(module, function) do
     function_name = elem(function, 0)
     arity = elem(function, 1)
 

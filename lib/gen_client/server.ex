@@ -2,11 +2,9 @@ defmodule GenClient.Server do
 
   def create(calls, casts) do
     quote do
-      defmodule Server do
-        use GenServer
-        unquote_splicing(calls)
-        unquote_splicing(casts)
-      end
+      use GenServer
+      unquote_splicing(calls)
+      unquote_splicing(casts)
     end
   end
 

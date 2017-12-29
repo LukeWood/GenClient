@@ -23,7 +23,7 @@ defmodule GenClient.Mixfile do
       name: "GenClient",
       maintainers: ["Luke Wood"],
       licenses: ["MIT"],
-      links: %{"Gituhb" => "https://github.com/LukeWood/GenClient/"}
+      links: %{"Github" => "https://github.com/LukeWood/GenClient/"}
     ]
   end
 

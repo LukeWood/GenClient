@@ -1,6 +1,7 @@
 defmodule GenClient do
   defmacro __using__(for: module, calls: calls, casts: casts) do
     module_expanded = Macro.expand(module, __ENV__)
+    Code.ensure_compiled?(module_expanded)
     calls = get_arities(module_expanded, calls)
     casts = get_arities(module_expanded, casts)
 

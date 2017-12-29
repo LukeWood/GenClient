@@ -1,5 +1,9 @@
 # GenClient
-GenClient is an elixir library made to generate boilerplate code that I found myself repeatedly writing and changing when working with GenServers
+GenClient is an elixir library made to generate boilerplate code that I found myself repeatedly writing and changing when working with GenServers.
+
+Every time I wanted to add or remove a parameter from a GenServer module I needed to do so in several places.
+
+GenClient is a metaprogramming library that helps the programmer write their logic in a single location and keep it there.
 
 ### Adding as a mix dependency
 ```elixir
@@ -9,13 +13,16 @@ GenClient is an elixir library made to generate boilerplate code that I found my
 ```
 
 ### Example
-The following module definition should be rewritten with GenClient as follows:
+Here is a module written using a standard GenServer implementation
+
+###### counter.ex
 ```elixir
 defmodule Counter do
   defdelegate increment(pid), to: Client
   defdelegate peek(pid),      to: CLient
 end
 ```
+###### counter/client.ex
 ```elixir
 defmodule Counter.Client do
 
@@ -29,6 +36,7 @@ defmodule Counter.Client do
 
 end
 ```
+###### counter/server.ex
 ```elixir
 defmodule Counter.Server do
   def handle_cast(:increment, state) do
@@ -40,18 +48,22 @@ defmodule Counter.Server do
   end
 end
 ```
+###### counter/impl.ex
+Obviously this is unneccesary in the case of a counter but in more complex
+applications it is nice to separate the state manipulation logic from the GenServer
+logic
 ```elixir
 defmodule Counter.Impl do
   def increment(state), do: state + 1
 end
 ```
 
-# Can be written using GenClient as follows:
+# The Previous Module Can be written using GenClient as follows:
 
 ```elixir
 defmodule Counter do
-  # Would like to prevent the need for explicit passing of calls and casts to give a slightly nicer API
-  use GenClient, for: Counter.Impl,
+  use GenClient,
+    for: Counter.Impl,
     calls: [:peek],
     casts: [:increment, :increment_by]
 end

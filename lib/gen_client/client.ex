@@ -9,7 +9,6 @@ defmodule GenClient.Client do
 
   def call_definition(function) do
     {function_name, params, fn_args, pid_arg} = setup_definition(function)
-
     quote do
       def unquote(function_name)(unquote_splicing(params)) do
         GenServer.call(unquote(pid_arg), {unquote_splicing(fn_args)})
@@ -19,7 +18,6 @@ defmodule GenClient.Client do
 
   def cast_definition(function) do
     {function_name, params, fn_args, pid_arg} = setup_definition(function)
-
     quote do
       def unquote(function_name)(unquote_splicing(params)) do
         GenServer.cast(unquote(pid_arg), {unquote_splicing(fn_args)})

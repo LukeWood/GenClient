@@ -2,7 +2,6 @@ defmodule GenClient do
 
   @moduledoc """
     The GenClient module is to be used with the use macro.
-
     GenClient handles the interface between your state management logic and
     the GenServer library.
   """
@@ -20,11 +19,12 @@ defmodule GenClient do
     server_calls = Enum.map(calls, &GenClient.Server.call_definition(module, &1))
     server_casts = Enum.map(casts, &GenClient.Server.cast_definition(module, &1))
 
-    client = GenClient.Client.create(client_calls, client_casts)
-    server = GenClient.Server.create(server_calls, server_casts)
     quote do
-      unquote(client)
-      unquote(server)
+      use GenServer
+      unquote_splicing(client_calls)
+      unquote_splicing(client_casts)
+      unquote_splicing(server_calls)
+      unquote_splicing(server_casts)
     end
   end
 

@@ -42,13 +42,11 @@ defmodule Counter.Server do
 end
 ```
 ###### counter/impl.ex
-
 ```elixir
 defmodule Counter.Impl do
   def increment(state), do: state + 1
 end
 ```
-
 # The Previous Module Can be written using GenClient as follows:
 
 ###### counter.ex
@@ -64,7 +62,11 @@ end
 ```elixir
 defmodule Counter.Impl do
   def increment(state), do: state + 1
-  def peek(state), do: state
+  def peek(state) do state
+    result = state + 1
+    response = result
+    {response, result}
+  end
 end
 ```
 

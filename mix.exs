@@ -4,10 +4,26 @@ defmodule GenClient.Mixfile do
   def project do
     [
       app: :gen_client,
-      version: "0.1.0",
+      version: "1.0.0",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
-      deps: deps()
+      deps: deps(),
+      description: description(),
+      package: package(),
+      source_url: "https://github.com/LukeWood/GenClient/"
+    ]
+  end
+
+  defp description() do
+    "GenClient is metaprogramming library made to generate boilerplate code that I found myself repeatedly writing and changing when working with GenServers."
+  end
+
+  defp package() do
+    [
+      name: "GenClient",
+      maintainers: ["Luke Wood"],
+      licenses: ["MIT"],
+      links: %{"Gituhb" => "https://github.com/LukeWood/GenClient/"}
     ]
   end
 
@@ -18,11 +34,9 @@ defmodule GenClient.Mixfile do
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:ex_doc, "~> 0.11", only: :dev}
     ]
   end
 end

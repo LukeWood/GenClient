@@ -15,8 +15,8 @@ defmodule GenClient.Server do
 
     quote do
       def handle_call({unquote_splicing(parameters)}, _from, unquote(state_arg)) do
-        result = apply(unquote(module), unquote(function_name), [unquote_splicing(args)])
-        {:reply, result, result}
+        {response, new_state} = apply(unquote(module), unquote(function_name), [unquote_splicing(args)])
+        {:reply, response, new_state}
       end
     end
   end

@@ -8,7 +8,7 @@ defmodule TestModule.Impl do
 
   def increment_by(state, num), do: state + num
   def increment_by(state), do: state + 5
-  def peek(state), do: state
+  def peek(state), do: {state, state}
 end
 
 defmodule TestModule do

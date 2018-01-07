@@ -61,14 +61,17 @@ end
 ###### counter/counter.impl.ex
 ```elixir
 defmodule Counter.Impl do
+  # Casts
   def increment(state), do: state + 1
+  def increment_by(amount), do: state + amount
+  
+  # Calls
   def peek(state) do
     response = state
     new_state = state
     {response, new_state}
   end
   
-  def increment_by(amount), do: state + amount
 end
 ```
 

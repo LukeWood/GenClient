@@ -20,7 +20,7 @@ end
 defmodule Counter.Client do
 
   def increment() do
-    GenServer.cast(pid. :increment)
+    GenServer.cast(pid, :increment)
   end
 
   def peek() do

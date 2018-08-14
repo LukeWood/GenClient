@@ -63,7 +63,7 @@ end
 defmodule Counter.Impl do
   # Casts
   def increment(state), do: state + 1
-  def increment_by(amount), do: state + amount
+  def increment_by(state, amount), do: state + amount
   
   # Calls
   def peek(state) do

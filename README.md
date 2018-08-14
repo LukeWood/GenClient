@@ -12,7 +12,7 @@ Here is a module written using a standard GenServer implementation
 ```elixir
 defmodule Counter do
   defdelegate increment(pid), to: Client
-  defdelegate peek(pid),      to: CLient
+  defdelegate peek(pid),      to: Client
 end
 ```
 ###### counter/client.ex

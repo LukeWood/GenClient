@@ -11,19 +11,24 @@ Here is a module written using a standard GenServer implementation
 ###### counter.ex
 ```elixir
 defmodule Counter do
-  defdelegate increment(pid), to: Client
-  defdelegate peek(pid),      to: Client
+  defdelegate increment(pid),       to: Client
+  defdelegate increment_by(pid, x), to: Client
+  defdelegate peek(pid),            to: Client
 end
 ```
 ###### counter/client.ex
 ```elixir
 defmodule Counter.Client do
 
-  def increment() do
+  def increment(pid) do
     GenServer.cast(pid, :increment)
   end
+  
+  def increment_by(pid, x) do
+    GenServer.cast(pid, {:increment_by, x})
+  end
 
-  def peek() do
+  def peek(pid) do
     GenServer.call(pid, :peek)
   end
 

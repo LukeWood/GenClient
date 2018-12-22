@@ -35,7 +35,11 @@ defmodule Counter.Server do
   def handle_cast(:increment, state) do
     {:no_reply, Counter.Impl.increment(state)}
   end
-
+  
+  def handle_cast({:increment_by, x}, state) do
+    {:no_reply, Counter.Impl.increment_by(state, x)}
+  end
+  
   def handle_call(:peek, _from, state) do
     {:reply, state, state}
   end
@@ -45,6 +49,7 @@ end
 ```elixir
 defmodule Counter.Impl do
   def increment(state), do: state + 1
+  def increment_by(state, x), do: state + x
 end
 ```
 # The Previous Module Can be written using GenClient as follows:

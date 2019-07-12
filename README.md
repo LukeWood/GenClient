@@ -1,9 +1,9 @@
 # GenClient
-GenClient is an elixir library made to generate boilerplate code that I found myself repeatedly writing and changing when working with GenServers.
+GenClient is an elixir metaprogramming library made to generate boilerplate code that I found myself repeatedly writing and changing when working with GenServers.
 
 Every time I wanted to add or remove a parameter from a GenServer module I needed to do so in several places.
 
-GenClient is a metaprogramming library that helps the programmer write their logic in a single location and keep it there.
+GenClient lets the programmer write their logic in a single location and keep it there.
 
 ### Example
 Here is a module written using a standard GenServer implementation

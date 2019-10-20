@@ -1,6 +1,9 @@
 # GenClient
 
-**Note:  Don't use this in production.  PragDave's [Component library](https://github.com/pragdave/component) is a much more feature complete library than this.
+> ### Note
+>
+>  Don't use this in production.
+> PragDave's [Component library](https://github.com/pragdave/component) is a much more feature complete library and is of much higher quality.
 
 GenClient is an elixir metaprogramming library made to generate boilerplate code that I found myself repeatedly writing and changing when working with GenServers.
 
